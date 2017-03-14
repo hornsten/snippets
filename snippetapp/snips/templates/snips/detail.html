@@ -1,0 +1,32 @@
+{% extends 'snips/base.html'%} {% block page_title%}Snippet Detail Page{%endblock%} {% block content %}
+<div class="container">
+    <h1>{{ snip.title}} in {{snip.language }}</h1>
+    <p>{{ snip.description }} </p>
+    <pre>
+      {{ snip.snip }}
+    </pre>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Update Snippet</h3>
+        </div>
+        <div class="panel-body">
+            <form action="{% url 'snips:update_snip' snip.pk %}" method="POST" class="post-form">{% csrf_token %}
+                <div class="col-md-2 text-center"><input type="text" name="title" value={{snip.title }} maxlength='100' class="text-center" required /></div>
+                <div class="col-md-2 text-center"><input type="text" name="language" value={{ snip.language }} maxlength='200' class="text-center" required/></div>
+                <div class="col-md-2 text-center"><input type="text" name="description" value={{ snip.description }} maxlength='200' class="text-center" required/></div>
+                <div class="col-md-2 text-center"><input type="text" name="snip" value={{ snip.snip }} maxlength='300' class="text-center" required/></div>
+                <div class="col-md-2 text-center"><button type="submit" class="btn btn-success save">Update</button></div>
+                <div class="col-md-2 text-center"></div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <a href="/">Go To Home Page</a>
+
+
+    <a href="/delete_snip/{{snip.pk}}">Delete Snippet</a> {% endblock %}
+
+</div>
